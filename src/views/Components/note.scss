@@ -1,0 +1,92 @@
+.board-column {
+    margin: 10px;
+    width: 300px;
+    min-height: 100px;
+    height: auto;
+    overflow: hidden;
+    background: #ebeef5;
+    border-radius: 3px;
+    .board-column-header {
+        font-size: 1.2em;
+        font-weight: bold;
+        width: calc(100% - 40px);
+        height: 50px;
+        padding: 0 20px;
+        background: #c0c4cc;
+        color: #fff;
+        border-radius: 3px 3px 0 0;
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        .add-button {
+            color: #fff;
+            border: 1 solid transparent;
+            padding: 4px;
+            &:hover {
+                border-color: #fff;
+            }
+        }
+    }
+    .board-column-content {
+        height: auto;
+        overflow: hidden;
+        padding: 5px 10px;
+        min-height: 60px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        .note-item {
+            cursor: pointer;
+            background-color: #fff;
+            text-align: left;
+            padding: 5px 10px;
+            box-sizing: border-box;
+            min-height: 51px;
+            border: 3px solid transparent;
+            &:hover {
+                .note-button-container {
+                    .note-button {
+                        display: unset;
+                    }
+                }
+            }
+            .note-title {
+                color: #222;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .note-subtitle {
+                color: #aaa;
+                font-size: 0.8em;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .note-index {
+                color: #fb7299;
+                font-size: 0.8em;
+            }
+            .note-main-container {
+                padding: unset;
+                overflow: hidden;
+            }
+            .note-button-container {
+                display: flex;
+                align-items: center;
+                .note-button {
+                    color: #aaa;
+                    font-size: 1.6em;
+                    display: none;
+                    transition: color 0.15s;
+                }
+            }
+        }
+        .no-note {
+            color: #909399;
+            font-size: 0.9em;
+            text-align: center;
+        }
+    }
+}

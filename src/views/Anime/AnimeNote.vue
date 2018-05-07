@@ -5,36 +5,36 @@
             <el-button class="add-button" icon="el-icon-plus" type="text" circle @click="dialogVisible = true"></el-button>
         </div>
         <drag-list class="board-column-content" :list="list" :options="options" :changeHandler="saveList">
-            <div class="anime-item" slot-scope="{ element }">
+            <div class="note-item" slot-scope="{ element }">
                 <el-container>
-                    <el-main class="anime-main-container">
-                        <div class="anime-title">{{element.title}}</div>
-                        <div class="anime-subtitle">{{element.subtitle}}</div>
-                        <div class="anime-index-container">
-                            <div class="anime-index no-drag">
-                                <div class="anime-index-left">第</div>
-                                <div class="anime-index-left-arrow" @click.left="element.index -=1; saveList()">
+                    <el-main class="note-main-container">
+                        <div class="note-title">{{element.title}}</div>
+                        <div class="note-subtitle">{{element.subtitle}}</div>
+                        <div class="note-index-container">
+                            <div class="note-index no-drag">
+                                <div class="note-index-left">第</div>
+                                <div class="note-index-left-arrow" @click.left="element.index -=1; saveList()">
                                     <el-icon name="caret-left"></el-icon>
                                 </div>
-                                <div class="anime-index-content">{{element.index}}</div>
-                                <div class="anime-index-right-arrow" @click.left="element.index +=1; saveList()">
+                                <div class="note-index-content">{{element.index}}</div>
+                                <div class="note-index-right-arrow" @click.left="element.index +=1; saveList()">
                                     <el-icon name="caret-right"></el-icon>
                                 </div>
-                                <div class="anime-index-right">话</div>
+                                <div class="note-index-right">话</div>
                             </div>
                             <el-tooltip :content="element.remark" placement="top" v-if="element.remark">
-                                <el-icon class="anime-remark-icon" name="warning"></el-icon>
+                                <el-icon class="note-remark-icon" name="warning"></el-icon>
                             </el-tooltip>
                         </div>
                     </el-main>
-                    <el-aside class="anime-button-container" width="auto">
-                        <div class="anime-button no-drag" @click="editNote(element)">
+                    <el-aside class="note-button-container" width="auto">
+                        <div class="note-button no-drag" @click="editNote(element)">
                             <el-icon name="edit-outline"></el-icon>
                         </div>
                     </el-aside>
                 </el-container>
             </div>
-            <div class="no-anime no-drag" slot="blank-text">今天没有追番</div>
+            <div class="no-note no-drag" slot="blank-text">今天没有追番</div>
         </drag-list>
         <el-dialog title="添加番剧" :visible.sync="dialogVisible" width="30%" :show-close="false" :close-on-click-modal="false" :close-on-press-escape="false">
             <el-form ref="form" :model="form" label-width="80px" label-position="left">
@@ -133,147 +133,62 @@ export default {
 };
 </script>
 <style lang="scss">
+@import "../Components/note";
+
 .board-column {
-    margin: 10px;
-    width: 300px;
-    min-height: 100px;
-    height: auto;
-    overflow: hidden;
-    background: #ebeef5;
-    border-radius: 3px;
-
-    .board-column-header {
-        font-size: 1.2em;
-        font-weight: bold;
-        width: calc(100% - 40px);
-        height: 50px;
-        padding: 0 20px;
-        background: #c0c4cc;
-        color: #fff;
-        border-radius: 3px 3px 0 0;
-        display: inline-flex;
-        justify-content: space-between;
-        align-items: center;
-
-        &.today {
-            background: #67c23a;
-        }
-        .add-button {
-            color: #fff;
-            border: 1 solid transparent;
-            padding: 4px;
-
-            &:hover {
-                border-color: #fff;
-            }
-        }
+    .board-column-header.today {
+        background: #67c23a;
     }
     .board-column-content {
-        height: auto;
-        overflow: hidden;
-        padding: 5px 10px;
-        min-height: 60px;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-
-        .sortable-chosen .anime-item {
+        .sortable-chosen .note-item {
             border-color: #67c23a;
         }
-        .anime-item {
-            cursor: pointer;
-            background-color: #fff;
-            text-align: left;
-            padding: 5px 10px;
-            box-sizing: border-box;
-            min-height: 51px;
-            border: 3px solid transparent;
-
-            .anime-title {
-                color: #222;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .anime-subtitle {
-                color: #aaa;
-                font-size: 0.8em;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .anime-index-container {
+        .note-item {
+            .note-index-container {
                 display: flex;
                 align-items: center;
-                font-size: 0.8em;
-
-                .anime-index {
-                    color: #fb7299;
+                .note-index {
                     display: flex;
                     align-items: center;
-
-                    .anime-index-content {
+                    .note-index-content {
                         margin: 0 5px;
                     }
-                    .anime-index-left,
-                    .anime-index-right {
+                    .note-index-left,
+                    .note-index-right {
                         display: unset;
                     }
-                    .anime-index-left-arrow,
-                    .anime-index-right-arrow {
+                    .note-index-left-arrow,
+                    .note-index-right-arrow {
                         display: none;
                         border-radius: 3px;
                         color: #aaa;
                         transition: color 0.15s;
-
                         &:hover {
                             color: #fb7299;
                         }
                     }
                     &:hover {
-                        .anime-index-left,
-                        .anime-index-right {
+                        .note-index-left,
+                        .note-index-right {
                             display: none;
                         }
-                        .anime-index-left-arrow,
-                        .anime-index-right-arrow {
+                        .note-index-left-arrow,
+                        .note-index-right-arrow {
                             display: unset;
                         }
                     }
                 }
-                .anime-remark-icon {
+                .note-remark-icon {
                     color: #409eff;
                     margin-left: 5px;
+                    font-size: 0.8em;
                 }
             }
-            .anime-main-container {
-                padding: unset;
-                overflow: hidden;
-            }
-            .anime-button-container {
-                display: flex;
-                align-items: center;
-
-                .anime-button {
-                    color: #aaa;
-                    font-size: 1.6em;
-                    display: none;
-                    transition: color 0.15s;
-
-                    &:hover {
-                        color: #67c23a;
-                    }
+            .note-button-container {
+                .note-button:hover {
+                    color: #67c23a;
                 }
             }
-            &:hover {
-                .anime-button {
-                    display: unset;
-                }
-            }
-        }
-        .no-anime {
-            color: #909399;
-            font-size: 0.9em;
-            text-align: center;
         }
     }
 }
