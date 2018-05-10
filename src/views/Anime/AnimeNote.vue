@@ -23,7 +23,7 @@
                                 <div class="note-index-right">话</div>
                             </div>
                             <el-tooltip :content="element.remark" placement="top" v-if="element.remark">
-                                <el-icon class="note-remark-icon" name="warning"></el-icon>
+                                <el-icon class="note-remark-icon no-drag" name="warning"></el-icon>
                             </el-tooltip>
                         </div>
                     </el-main>
