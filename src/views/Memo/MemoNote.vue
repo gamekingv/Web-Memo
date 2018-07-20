@@ -23,7 +23,7 @@
             </div>
             <div class="no-note no-drag" slot="blank-text">没有备忘</div>
         </drag-list>
-        <el-dialog title="添加备忘" :visible.sync="dialogVisible" width="30%" :show-close="false" :close-on-click-modal="false" :close-on-press-escape="false">
+        <el-dialog title="添加备忘" :visible.sync="dialogVisible" width="30%" :show-close="false" :close-on-click-modal="false" :close-on-press-escape="false" :append-to-body="true">
             <el-form ref="form" :model="form" label-width="80px" label-position="left">
                 <el-form-item label="字段1" prop="field1">
                     <el-input v-model="form.field1"></el-input>
@@ -100,9 +100,11 @@ export default {
         },
         editNote(element) {
             this.editing = true;
-            for (let formItem in this.form)
-                this.form[formItem] = element[formItem];
             this.dialogVisible = true;
+            this.$nextTick(() => {
+                for (let formItem in this.form)
+                    this.form[formItem] = element[formItem];
+            });
         }
     },
     created() {
