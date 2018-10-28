@@ -23,9 +23,9 @@
                 <span slot="label">
                     <i class="el-icon-setting"></i> 选项</span>
                 <el-upload class="upload-button" action="" :show-file-list="false" accept="application/json" :http-request="importConfig">
-                    <el-button type="primary">导入</el-button>
+                    <el-button type="primary">导入配置</el-button>
                 </el-upload>
-                <el-button class="export-button" @click="exportConfig">生成配置</el-button>
+                <el-button class="export-button" @click="exportConfig">导出配置</el-button>
             </el-tab-pane>
         </el-tabs>
     </div>
@@ -75,16 +75,14 @@ export default {
     }),
     methods: {
         exportConfig() {
-            let a = document.querySelector('.download-button');
-            if (!a) {
-                a = document.createElement('a');
-                a.download = 'memo.json';
-                a.innerHTML = '下载配置';
-                a.className = 'el-button download-button';
-                document.querySelector('.export-button').parentNode.appendChild(a);
-            }
+            let a = document.createElement('a');
+            a.download = 'memo.json';
+            a.style.display = 'none';
+            document.querySelector('.export-button').parentNode.appendChild(a);
             let file = new Blob([JSON.stringify(localStorage)], { type: 'application/json' });
             a.href = URL.createObjectURL(file);
+            a.click();
+            a.parentNode.removeChild(a);
         },
         importConfig(e) {
             let reader = new FileReader();
